@@ -37,7 +37,7 @@ app.use(cors({
         "http://localhost:5500",
         "http://localhost:5000",
         "http://localhost:5173",
-        "https://eric-chat-bot.vercel.app"
+        "https://eric-chat-bot-3-0.vercel.app"
     ],
     methods: ["GET", "POST", "OPTIONS"],
     credentials: true

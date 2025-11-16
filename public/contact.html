@@ -438,7 +438,7 @@
                 showStatus("Sending...", false);
 
                 try {
-                    const resp = await fetch('https://eric-chat-bot.onrender.com/api/contact', {
+                    const resp = await fetch('https://eric-chat-bot-3-0.onrender.com/api/contact', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(data)
@@ -477,7 +477,7 @@
             const status = document.getElementById('status');
 
             form.addEventListener('submit', function(e) {
-                e.preventDefault(); // Prevent default POST request to /api/contact
+                e.preventDefault();
                 sendBtn.disabled = true;
                 status.textContent = "Sending...";
 

@@ -201,7 +201,7 @@ async function generateBotReply(userMsg) {
         const WEATHER_BASE_URL =
             window.location.hostname === "localhost"
                 ? "http://localhost:5000/api/weather"
-                : "https://eric-chat-bot-3.onrender.com/api/weather";
+                : "https://eric-chat-bot-3-0.onrender.com/api/weather";
 
 
         try {
