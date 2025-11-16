@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eric Chat Bot</title>
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="script.js"></script>
+    <script defer src="bot.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="Bot Avatar.png" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js" defer></script>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">🤖 ERIC ChatBot</div>
+
+        <!-- Hamburger Icon (Mobile Only) -->
+        <div class="hamburger" id="hamburger">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+
+        <div class="nav-links" id="nav-links">
+            <a href="home.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+
+            <span id="user-name" class="user-name"></span>
+
+            <button class="logout-btn" id="logout-btn" style="display:none;">Logout</button>
+            <button class="login-btn" id="login-btn" onclick="window.location.href='login.html'">Login</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Welcome to <span>ERIC AI</span></h1>
+        <p>Your intelligent assistant powered by AI & ML</p>
+    </section>
+
+    <!-- Chat Section -->
+    <section class="chat-section">
+        <div class="chat-box" id="chat-box">
+            <div class="bot-message">Hello 👋 I’m Eric, your AI assistant. How can I help you today?</div>
+        </div>
+
+        <!-- Input + Mic + Send Buttons -->
+        <div class="input-area">
+            <input type="text" id="user-input" placeholder="Type your message..." />
+
+            <!-- 🎤 Mic Button -->
+            <button id="mic-btn" class="icon-btn" title="Speak">
+                <i class="fas fa-microphone"></i>
+            </button>
+
+            <!-- 📤 Send Button -->
+            <button id="send-btn" class="icon-btn" title="Send">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Tech Nexus | ERIC CHAT BOT</p>
+    </footer>
+</body>
+</html>

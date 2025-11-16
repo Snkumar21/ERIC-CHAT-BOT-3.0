@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eric ChatBot - Login</title>
+  <link rel="icon" type="image/x-icon" href="Bot Avatar.png" />
+  <style>
+    /* === General Reset === */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #000, #002a34);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    /* === Login Container === */
+    .login-container {
+      background: rgba(0, 0, 0, 0.85);
+      border: 1px solid #00bcd4;
+      border-radius: 15px;
+      box-shadow: 0 0 25px rgba(0, 188, 212, 0.4);
+      width: 350px;
+      padding: 30px 25px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .login-container:hover {
+      box-shadow: 0 0 35px rgba(0, 188, 212, 0.6);
+      transform: scale(1.02);
+    }
+
+    /* === Header === */
+    h2 {
+      color: #00bcd4;
+      font-size: 1.8em;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+    }
+
+    /* === Input Fields === */
+    .input-group {
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-size: 0.9em;
+      color: #ccc;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      background: #111;
+      border: 1px solid #00bcd4;
+      border-radius: 8px;
+      color: #fff;
+      outline: none;
+      font-size: 1em;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      border-color: #00e5ff;
+      box-shadow: 0 0 8px #00bcd4;
+    }
+
+    /* === Button === */
+    button {
+      width: 100%;
+      background: #00bcd4;
+      border: none;
+      color: white;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #0097a7;
+      box-shadow: 0 0 10px #00bcd4;
+    }
+
+    /* === Message === */
+    .message {
+      margin-top: 15px;
+      font-size: 0.9em;
+      color: #ff5252;
+      height: 20px;
+    }
+
+    /* === Footer === */
+    .footer {
+      margin-top: 20px;
+      font-size: 0.85em;
+      color: #aaa;
+    }
+
+    .footer a {
+      color: #00bcd4;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* === Responsive === */
+    @media (max-width: 400px) {
+      .login-container {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="login-container">
+    <h2>Eric ChatBot Login</h2>
+    <form id="loginForm">
+      <div class="input-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="Enter your email" required />
+      </div>
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter your password" required />
+      </div>
+      <button type="submit">Login</button>
+      <div class="message" id="message"></div>
+    </form>
+
+    <div class="footer">
+      Don’t have an account? <a href="register.html">Sign up</a>
+    </div>
+  </div>
+
+  <script>
+    const API_BASE_URL = window.location.hostname === "localhost"
+      ? "http://localhost:5000"
+      : "https://eric-chat-bot.onrender.com";
+
+    document.getElementById("loginForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const message = document.getElementById("message");
+
+      message.textContent = "⏳ Checking credentials...";
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          message.style.color = "#00e676";
+          message.textContent = "✅ Login Successful! Redirecting...";
+
+          localStorage.setItem("ericUser", JSON.stringify(data.user));
+
+          setTimeout(() => {
+            window.location.href = "/home.html";
+          }, 1500);
+        } else {
+          message.style.color = "#ff5252";
+          message.textContent = data.message || "❌ Invalid credentials!";
+        }
+      } catch (error) {
+        message.style.color = "#ff5252";
+        message.textContent = "⚠️ Server error. Please try again later.";
+      }
+    });
+  </script>
+</body>
+</html>

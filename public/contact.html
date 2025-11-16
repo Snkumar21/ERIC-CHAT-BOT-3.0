@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Contact — Eric Chat Bot</title>
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="script.js"></script>
+    <meta name="description" content="Contact page for Eric Chat Bot" />
+    <style>
+        :root{
+            --bg: radial-gradient(circle at top left, #0f2027, #203a43, #2c5364);
+            --card:#0b1220;
+            --accent:#3b82f6;
+            --muted:#94a3b8;
+            --text:#e6eef8;
+            --radius:12px;
+            --max-width:820px;
+        }
+
+        *{
+            box-sizing:border-box;
+            margin:0;
+            padding:0;
+        }
+
+        body{
+            background:var(--bg);
+            color:var(--text);
+            font-family:'Poppins',sans-serif;
+        }
+
+        /* ===========================
+        MAIN CONTAINER
+        =========================== */
+        .container{
+            width:100%;
+            max-width:var(--max-width);
+            background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.02));
+            border-radius:var(--radius);
+            padding:28px;
+            box-shadow:0 6px 30px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+
+            display:grid;
+            grid-template-columns:1fr 360px;
+            gap:24px;
+
+            margin:60px auto;
+        }
+
+        /* ===========================
+        HEADINGS
+        =========================== */
+        header h1{
+            margin-bottom:6px;
+            font-size:22px;
+            line-height:1.4;
+        }
+
+        header p{
+            margin-bottom:18px;
+            color:var(--muted);
+            font-size:14px;
+        }
+
+        /* ===========================
+        FORM
+        =========================== */
+        form{
+            display:flex;
+            flex-direction:column;
+            gap:12px;
+        }
+
+        label{
+            font-size:13px;
+            color:var(--muted);
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        textarea,
+        select{
+            width:100%;
+            padding:12px 14px;
+            background:transparent;
+            border:1px solid rgba(255,255,255,0.06);
+            border-radius:10px;
+            color:var(--text);
+            outline:none;
+            font-size:15px;
+        }
+
+        textarea{
+            min-height:140px;
+            resize:vertical;
+        }
+
+        /* FORM ROWS */
+        .row{
+            display:flex;
+            gap:12px;
+        }
+        .row .col{
+            flex:1;
+        }
+
+        /* BUTTONS */
+        button{
+            background:var(--accent);
+            color:white;
+            border:0;
+            padding:12px 16px;
+            font-weight:600;
+            border-radius:10px;
+            cursor:pointer;
+            box-shadow:0 6px 18px rgba(59,130,246,0.18);
+            font-size:15px;
+            transition:0.25s ease;
+        }
+
+        button:hover{
+            transform:translateY(-2px);
+        }
+
+        button[disabled]{
+            opacity:0.6;
+            cursor:not-allowed;
+        }
+
+        .secondary{
+            background:transparent;
+            border:1px solid rgba(255,255,255,0.06);
+            color:var(--muted);
+            padding:10px 14px;
+        }
+
+        /* SIDE PANEL */
+        .panel{
+            background:linear-gradient(180deg,rgba(255,255,255,0.01),rgba(255,255,255,0.00));
+            padding:16px;
+            border-radius:10px;
+            border:1px solid rgba(255,255,255,0.03);
+            color:var(--muted);
+            font-size:14px;
+        }
+
+        .meta{
+            display:flex;
+            flex-direction:column;
+            gap:10px;
+        }
+
+        .meta-item{
+            display:flex;
+            gap:8px;
+            align-items:center;
+        }
+        .meta-item strong{
+            color:var(--text);
+            min-width:80px;
+            font-size:13px;
+        }
+
+        .notice{
+            color:#86efac;
+            background:rgba(134,239,172,0.06);
+            padding:8px;
+            border-radius:8px;
+            font-size:13px;
+        }
+
+        .status{
+            margin-top:6px;
+            font-size:13px;
+            color:var(--muted);
+        }
+
+        /* ===========================
+        MOBILE RESPONSIVE DESIGN
+        =========================== */
+
+        @media (max-width:880px){
+            .container{
+                grid-template-columns:1fr;
+                padding:20px;
+                margin:20px;
+            }
+
+            header h1{
+                font-size:20px;
+                text-align:center;
+            }
+
+            header p{
+                font-size:13px;
+                text-align:center;
+            }
+
+            .panel{
+                margin-top:10px;
+            }
+        }
+
+        @media (max-width:600px){
+            .row{
+                flex-direction:column;
+            }
+
+            button, .secondary{
+                width:100%;
+                text-align:center;
+                padding:12px;
+            }
+
+            input,
+            select,
+            textarea{
+                font-size:14px;
+                padding:10px 12px;
+            }
+
+            .container{
+                padding:16px;
+            }
+
+            .meta-item strong{
+                min-width:70px;
+            }
+        }
+
+        @media (max-width:420px){
+            header h1{
+                font-size:18px;
+            }
+
+            .container{
+                padding:14px;
+                gap:18px;
+            }
+
+            textarea{
+                min-height:120px;
+            }
+        }
+
+        /* ===========================
+        SELECT DROPDOWN FIX
+        =========================== */
+        select { 
+            width: 100%; 
+            padding: 10px 12px;
+            border: 1px solid rgba(255,255,255,0.06); 
+            border-radius: 10px; 
+            color: var(--text); 
+            outline: none; 
+            font-size: 14px; 
+            -moz-appearance: none; 
+            -webkit-appearance: none; 
+            appearance: none; 
+            background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='14' viewBox='0 0 24 24' width='14' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>"); 
+            background-repeat: no-repeat; 
+            background-position: right 10px center; 
+            background-size: 14px; 
+            cursor: pointer; 
+        }
+
+        select:focus { 
+            border-color: var(--accent); 
+            box-shadow: 0 0 0 2px rgba(59,130,246,0.3); 
+        } 
+        
+        option { 
+            background-color: #203a43;
+            color: #e6eef8;
+        }
+
+        /* ===========================
+        FOOTER
+        =========================== */
+        footer{
+            margin-top:18px;
+            font-size:12px;
+            color:var(--muted);
+        }
+    </style>
+
+    <!-- FONT AWESOME -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js" defer></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">🤖 ERIC ChatBot</div>
+
+        <!-- Hamburger Icon (Mobile Only) -->
+        <div class="hamburger" id="hamburger">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+
+        <div class="nav-links" id="nav-links">
+            <a href="home.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+
+            <span id="user-name" class="user-name"></span>
+
+            <button class="logout-btn" id="logout-btn" style="display:none;">Logout</button>
+            <button class="login-btn" id="login-btn" onclick="window.location.href='login.html'">Login</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container" role="main">
+        <section class="contact">
+            <header>
+                <h1>Contact</h1>
+                <p>Send a message and we'll get back to you within 1–2 business days. Use this form for feedback, bug reports, or partnership inquiries.</p>
+            </header>
+
+            <form id="contactForm" novalidate>
+                <label class="hidden" for="website">Leave this field empty</label>
+                <input class="hidden" type="text" id="website" name="website" autocomplete="off" tabindex="-1" />
+
+                <div class="row">
+                    <div class="col">
+                        <label for="name">Full name</label>
+                        <input id="name" name="name" type="text" autocomplete="name" placeholder="Your name" required />
+                    </div>
+                    <div class="col">
+                        <label for="email">Email</label>
+                        <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+                    </div>
+                </div>
+
+                <label for="subject">Subject</label>
+                <input id="subject" name="subject" type="text" placeholder="What is this about?" maxlength="120" required />
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="Write your message..." required></textarea>
+
+                <div class="row">
+                    <div class="col">
+                        <label for="reason">Reason</label>
+                        <select id="reason" name="reason" required>
+                            <option value="">Choose one</option>
+                            <option>Feedback</option>
+                            <option>Bug report</option>
+                            <option>Partnership</option>
+                            <option>Support</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label for="phone">Phone Number</label>
+                        <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+91 999-888-4567" />
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <button type="submit" id="sendBtn">Send message</button>
+                    <button type="reset" class="secondary">Reset</button>
+                    <div id="status" class="status" aria-live="polite"></div>
+                </div>
+
+                <footer>
+                    By submitting you agree to our processing of this information for contact purposes only.
+                </footer>
+            </form>
+        </section>
+
+        <aside class="panel" aria-label="Contact information">
+            <div class="meta">
+                <div class="meta-item">
+                    <strong>Email</strong>
+                    <span>technexus@gmail.com</span>
+                </div>
+                <div class="meta-item">
+                    <strong>Phone</strong>
+                    <span>+91 999-888-4567</span>
+                </div>
+                <div class="meta-item">
+                    <strong>Hours</strong>
+                    <span>Mon–Fri, 9am–5pm PT</span>
+                </div>
+                <div class="meta-item">
+                    <strong>Address</strong>
+                    <span>Lohegoan, Pune, India</span>
+                </div>
+                <div class="notice">
+                    For urgent issues, email support@example.com directly.
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Tech Nexus | ERIC CHAT BOT</p>
+    </footer>
+
+    <script>
+        (function(){
+            const form = document.getElementById('contactForm');
+            const status = document.getElementById('status');
+            const sendBtn = document.getElementById('sendBtn');
+
+            function showStatus(message, isError){
+                status.textContent = message;
+                status.style.color = isError ? '#ff9b9b' : '#86efac';
+            }
+
+            form.addEventListener('submit', async function(e){
+                e.preventDefault();
+
+                const website = form.querySelector('[name="website"]').value;
+                if (website.trim() !== "") {
+                    showStatus("Submission blocked.", true);
+                    return;
+                }
+
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+
+                const data = {
+                    name: form.name.value.trim(),
+                    email: form.email.value.trim(),
+                    subject: form.subject.value.trim(),
+                    message: form.message.value.trim(),
+                    reason: form.reason.value,
+                    phone: form.phone.value.trim()
+                };
+
+                sendBtn.disabled = true;
+                showStatus("Sending...", false);
+
+                try {
+                    const resp = await fetch('https://eric-chat-bot.onrender.com/api/contact', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+
+                    if (resp.ok) {
+                        showStatus("Message sent — thank you!", false);
+                        form.reset();
+                    } else {
+                        const text = await resp.text().catch(()=>resp.statusText);
+                        showStatus("Server error: " + (text || resp.status), true);
+                    }
+                } catch (err) {
+                    showStatus("Network error — trying fallback...", true);
+                    try {
+                        const formData = new FormData(form);
+                        await fetch(form.action, { method: 'POST', body: formData });
+                        showStatus("Message sent via fallback.", false);
+                        form.reset();
+                    } catch (fallbackErr) {
+                        showStatus("Could not send message. Please email support@example.com", true);
+                    }
+                } finally {
+                    sendBtn.disabled = false;
+                }
+            }, { passive: false });
+        })();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        (function() {
+            emailjs.init("HUNMCLsYwZz37pxsQ");
+
+            const form = document.getElementById('contactForm');
+            const sendBtn = document.getElementById('sendBtn');
+            const status = document.getElementById('status');
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault(); // Prevent default POST request to /api/contact
+                sendBtn.disabled = true;
+                status.textContent = "Sending...";
+
+                emailjs.sendForm('service_eoolbcf', 'template_y4x9k4b', form)
+                    .then(() => {
+                        showAlert("✅ Message sent successfully!");
+                        form.reset();
+                        status.textContent = "";
+                    })
+                    .catch((error) => {
+                        console.error("EmailJS error:", error);
+                        showAlert("❌ Failed to send message. Please try again.", true);
+                        status.textContent = "";
+                    })
+                    .finally(() => {
+                        sendBtn.disabled = false;
+                    });
+            });
+
+            // Custom alert box
+            function showAlert(message, isError = false) {
+                const alertBox = document.getElementById("alertBox");
+                alertBox.style.backgroundColor = isError ? "#f44336" : "#00bcd4";
+                alertBox.textContent = message;
+                alertBox.style.display = "block";
+                setTimeout(() => alertBox.style.display = "none", 3000);
+            }
+        })();
+    </script>
+    <div id="alertBox" style="
+        display:none;
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: #00bcd4;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        z-index: 9999;
+        font-family: system-ui, sans-serif;
+        font-size: 14px;
+        animation: fadeInOut 3s ease forwards;
+    "></div>
+</body>
+</html>
