@@ -46,13 +46,13 @@ ERIC-CHAT-BOT is a chat-bot platform intended to integrate with your existing ba
 
 ## Tech Stack
 
-- Frontend: React.js  
+- Frontend: Html, CSS, JavaScript
 - Backend: Node.js + Express  
-- Database: MongoDB (with Mongoose ODM)  
+- Database: MongoDB (with Mongoose ODM)
 - HTTP client: Axios  
 - UI icons: FontAwesome  
 - File upload handling (via multer or similar)  
-- Hosting: can deploy backend on services like Railway/Render; frontend on Vercel
+- Hosting: can deploy backend on services like Render; frontend on Vercel
 
 ---
 
@@ -63,8 +63,8 @@ ERIC-CHAT-BOT is a chat-bot platform intended to integrate with your existing ba
 Ensure you have the following installed:
 
 - Node.js (v14 or above recommended)  
-- npm (or yarn)  
-- MongoDB instance (local or remote)  
+- npm
+- MongoDB instance
 - (Optional) Git  
 - (Optional) A hosting account (if you deploy)
 
@@ -93,19 +93,16 @@ Ensure you have the following installed:
 Create a `.env` (environment) file in the backend root (e.g., `server/.env`) with the following variables (adjust names as applicable):
 
 ```
+OPENAI_KEY=open_api_key
+MONGO_URI=mongodb+srv://<user_id>:<password>@cluster0.inpucev.mongodb.net/test?retryWrites=true&w=majority&appName=Cluster0
 PORT=5000
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret_key
-CLIENT_URL=http://localhost:3000
-FILE_UPLOAD_PATH=./uploads
+WEATHER_API_KEY=WEATHER_API_KEY
 ```
 
 - `PORT` – the port your Express app will listen on.  
 - `MONGO_URI` – connection string for MongoDB.  
-- `JWT_SECRET` – if authentication is used, secret for JWT tokens.  
-- `CLIENT_URL` – the URL for the frontend (for CORS).  
-- `FILE_UPLOAD_PATH` – directory path where uploaded files will be stored.
-
+- `OPENAI_KEY` – api call with chatgpt connection.
+- `WEATHER_API_KEY` – weather api key for fetching the details of current weather. 
 ### Database Setup
 
 1. Make sure your MongoDB instance is running.  
@@ -119,26 +116,26 @@ FILE_UPLOAD_PATH=./uploads
 Start the backend:
 
 ```bash
-cd server
-npm run dev    # or `node index.js` depending on setup
+cd backend
+node server.js
 ```
 
 Start the frontend:
 
 ```bash
-cd ../client
-npm start      # by default runs at http://localhost:3000
+cd public
+VS CODE Extension `Go Live` # by default runs at http://localhost:5000
 ```
 
-You should now be able to access the chat app at [http://localhost:3000](http://localhost:3000). The backend API runs on [http://localhost:5000](http://localhost:5000) (or the port you configured).
+You should now be able to access the chat app at [http://localhost:5000](http://localhost:5000). The backend API runs on [http://localhost:5000](http://localhost:5000) (or the port you configured).
 
 #### Build & production mode
 
 For production you might:
 
 ```bash
-cd client
-npm run build
+cd backend
+node server.js
 # Serve the static build via backend or deploy separately
 ```
 
@@ -171,40 +168,38 @@ Then host the backend on a service like Render or Railway and point the frontend
 
 ```
 ERIC-CHAT-BOT/
-├── server/             # Backend (Express + Node.js)
+├── backend/             # Backend (Express + Node.js)
 │   ├── models/
-│   │   ├── User.js
-│   │   └── Message.js
+│   │   ├── Chat.js
+│   │   ├── ChatData.js
+│   │   ├── chatMemory.js
+│   │   ├── Dataset.js
+│   │   └── User.js
 │   ├── routes/
-│   │   └── apiRoutes.js
+│   │   ├── authRoutes.js
+│   │   ├── chatRoutes.js
+│   │   ├── datasetRoutes.js
+│   │   └── weatherRoutes.js
 │   ├── middleware/
-│   │   └── authMiddleware.js
-│   ├── uploads/         # (If file uploads stored locally)
-│   ├── index.js
+│   │   └── errorHandler.js
+│   ├── server.js
 │   └── .env
-├── client/             # Frontend (React)
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   └── App.jsx
-│   ├── public/
-│   └── package.json
+├── public/             # Frontend
+│   ├── index.html
+│   ├── about.html
+│   ├── home.html
+│   ├── register.html
+│   ├── contact.html
+│   ├── bot.js
+│   ├── script.js
+│   ├── style.css
+│   └── BotAvatar.png
 └── README.md
 ```
 
 *Note:* adjust folder names if your project uses different names or structure.
 
 ---
-
-## Contributing
-
-Contributions are welcome! To contribute:
-
-1. Fork the repository.  
-2. Create a new branch: `git checkout -b feature/YourFeatureName`.  
-3. Make your changes and commit: `git commit -m "Add some feature"`.  
-4. Push to your branch: `git push origin feature/YourFeatureName`.  
-5. Open a Pull Request describing your changes.
 
 Please ensure your code adheres to the existing style and is well-documented.
 
@@ -221,6 +216,3 @@ This project is licensed under the MIT License – see the [LICENSE](LICENSE) fi
 Created by **Nitish Kumar Singh (Snkumar21)**.  
 GitHub: [https://github.com/Snkumar21](https://github.com/Snkumar21)  
 Email: snkumar6926@gmail.com
-
-
----
