@@ -1,5 +1,8 @@
 // ---------- BACKEND DATASET ROUTES ----------
-const DATASET_SEARCH_URL = "/api/dataset/search";
+const DATASET_SEARCH_URL = 
+    window.localStorage.hostname === "localhost"
+        ? "http://localhost:5000/api/dataset/search"
+        : "https://eric-chat-bot-3-0.onrender.com/api/dataset/search";
 const DATASET_ADD_URL =
     window.location.hostname === "localhost"
         ? "http://localhost:5000/api/dataset/add"
