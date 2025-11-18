@@ -1,6 +1,9 @@
 // ---------- BACKEND DATASET ROUTES ----------
 const DATASET_SEARCH_URL = "/api/dataset/search";
-const DATASET_ADD_URL = "/api/dataset/add";
+const DATASET_ADD_URL =
+    window.location.hostname === "localhost"
+        ? "http://localhost:5000/api/dataset/add"
+        : "https://eric-chat-bot-3-0.onrender.com/api/dataset/add";
 
 // ---------- CATEGORIES ----------
 const CATEGORIES = [
@@ -52,8 +55,7 @@ async function addToDataset(category, question, answer) {
             body: JSON.stringify({ category, question, answer })
         });
         return await res.json();
-    } catch (err) {
-        console.error("Dataset Add Error:", err);
+    } catch {
         return { success: false };
     }
 }
@@ -76,7 +78,6 @@ function findLocalMatch(msg) {
             best = q;
         }
     }
-
     return maxScore >= 2 ? best : null;
 }
 
